@@ -16,7 +16,7 @@ public abstract class BaseMenuDetailPager {
     public BaseMenuDetailPager(MainActivity activity) {
         mainActivity = activity;
         rootView = initView();
-        initData();
+
     }
 
     public abstract View initView();

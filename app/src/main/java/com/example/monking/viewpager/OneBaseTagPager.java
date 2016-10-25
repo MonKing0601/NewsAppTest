@@ -24,8 +24,6 @@ import java.util.List;
 public class OneBaseTagPager extends BaseTagPager {
 
 
-
-
     private List<BaseMenuDetailPager> baseMenuDetailPagers;
     private View view;
     private TextView tv;
@@ -36,6 +34,7 @@ public class OneBaseTagPager extends BaseTagPager {
 
     @Override
     public void initData() {
+
         im_menu.setVisibility(TextView.GONE);
         //更换标题
         textView.setText("老大的标题");
@@ -46,9 +45,9 @@ public class OneBaseTagPager extends BaseTagPager {
         tv.setGravity(Gravity.CENTER);
         //替换内容
         frameLayout.addView(tv);
-        /**
-         *没有缓存则缓存数据，有缓存则获取缓存
-         */
+    /**
+    *没有缓存则缓存数据，有缓存则获取缓存
+    */
         String cache = CacheUtils.getCache(mainActivity, GlobalConstants.CATEGORY_URL);
         if (!TextUtils.isEmpty(cache)) {
             processJson(cache);
@@ -68,7 +67,7 @@ public class OneBaseTagPager extends BaseTagPager {
         View view = pager.rootView;
         if (position == 0) {
             frameLayout.removeAllViews();
-            frameLayout.addView(tv);
+            frameLayout.addView(view);
         } else {
             frameLayout.removeAllViews();
             frameLayout.addView(view);

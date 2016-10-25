@@ -81,7 +81,6 @@ public class BaseTagPager {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 result = responseInfo.result;
-                System.out.println("服务器返回的" + result);
                 processJson(result);
                 CacheUtils.setCache(mainActivity, GlobalConstants.CATEGORY_URL, result);
             }
@@ -98,7 +97,7 @@ public class BaseTagPager {
      * 解析JSON的方法 调用的是Gson
      * @param json
      */
-    protected void processJson(String json) {
+    public void processJson(String json) {
         Gson gson = new Gson();
         newsMenu = gson.fromJson(json, NewsMenu.class);
         System.out.println("解析完成后的" + newsMenu);
@@ -106,10 +105,16 @@ public class BaseTagPager {
         MainActivity mainUI = mainActivity;
         MenuFragment menuFragment = mainUI.getLeftMenuFragment();
         menuFragment.setMenuData(newsMenu.data);
-
-
     }
 
+    public NewsMenu getNewsMenu(){
+        NewsMenu newsMenuData=new NewsMenu();
+        newsMenuData=newsMenu;
+        return newsMenuData;
+    }
 
+    public String  getResult(){
+        return result;
+    }
 
 }

@@ -47,11 +47,8 @@ public class MenuFragment extends BaseFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mCurrentPos = position;
                 adapter.notifyDataSetChanged();//刷新listview
-
                 //收起侧边栏
                 mainActivity.getSlidingMenu().toggle();
-
-
                 //从侧边菜单栏设置布局的内容
                 setMenuPager(position);
             }

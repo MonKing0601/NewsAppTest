@@ -37,10 +37,11 @@ public class MainContentFragment extends BaseFragment  {
 
     @Override
     public View initView() {
-        View root= View.inflate(mainActivity, R.layout.activity_main,null);
+        View root= View.inflate(mainActivity,R.layout.activity_main,null);
         viewPager= (ViewPager) root.findViewById(R.id.vp_act_main);
         radioGroup= (RadioGroup) root.findViewById(R.id.rg_act_main);
         return root;
+
     }
 
     /**

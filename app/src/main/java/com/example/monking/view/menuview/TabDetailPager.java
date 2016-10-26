@@ -1,5 +1,6 @@
 package com.example.monking.view.menuview;
 
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -19,24 +20,23 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private String title;
     private TextView tv;
 
-    public TabDetailPager(MainActivity activity, ArrayList<NewsMenu.DataMenu> dataMenus) {
+    public TabDetailPager(MainActivity activity, String dataMenus) {
         super(activity);
-        dataMenu=dataMenus;
+        title=dataMenus;
     }
 
     @Override
     public View initView() {
         tv = new TextView(mainActivity);
-
         return tv;
     }
 
     @Override
     public void initData() {
-        tv.setText("dddddddd"+dataMenu);
+        tv.setTextColor(Color.BLACK);
+        tv.setText(title);
         tv.setGravity(Gravity.CENTER);
-        tv.setTextSize(22);
-        tv.setTextColor(000);
+        tv.setTextSize(30);
 
     }
 }

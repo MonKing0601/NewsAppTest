@@ -1,4 +1,4 @@
-package com.example.monking.viewpager;
+package com.example.monking.view.baseviewpager;
 
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -8,11 +8,11 @@ import android.widget.TextView;
 import com.example.monking.global.GlobalConstants;
 import com.example.monking.newsapptest.act.MainActivity;
 import com.example.monking.utils.CacheUtils;
-import com.example.monking.view.menuview.BaseMenuDetailPager;
-import com.example.monking.view.menuview.InteractMenuPager;
-import com.example.monking.view.menuview.NewsMenuPager;
-import com.example.monking.view.menuview.PotosMenuPager;
-import com.example.monking.view.menuview.SubjectMenuPager;
+import com.example.monking.view.leftmenuview.BaseMenuDetailPager;
+import com.example.monking.view.leftmenuview.InteractMenuPager;
+import com.example.monking.view.leftmenuview.NewsMenuPager;
+import com.example.monking.view.leftmenuview.PotosMenuPager;
+import com.example.monking.view.leftmenuview.SubjectMenuPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,6 @@ public class OneBaseTagPager extends BaseTagPager {
     @Override
     public void initData() {
 
-        im_menu.setVisibility(TextView.GONE);
         //更换标题
         textView.setText("老大的标题");
         //创建内容

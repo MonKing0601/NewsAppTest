@@ -1,4 +1,4 @@
-package com.example.monking.fragment;
+package com.example.monking.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

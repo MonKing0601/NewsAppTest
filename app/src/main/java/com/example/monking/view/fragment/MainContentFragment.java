@@ -1,4 +1,4 @@
-package com.example.monking.fragment;
+package com.example.monking.view.fragment;
 
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -8,12 +8,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.monking.newsapptest.R;
-import com.example.monking.viewpager.BaseTagPager;
-import com.example.monking.viewpager.FiveBaseTagPager;
-import com.example.monking.viewpager.FourBaseTagPager;
-import com.example.monking.viewpager.OneBaseTagPager;
-import com.example.monking.viewpager.ThreeBaseTagPager;
-import com.example.monking.viewpager.TwoBaseTagPager;
+import com.example.monking.view.baseviewpager.BaseTagPager;
+import com.example.monking.view.baseviewpager.FiveBaseTagPager;
+import com.example.monking.view.baseviewpager.FourBaseTagPager;
+import com.example.monking.view.baseviewpager.OneBaseTagPager;
+import com.example.monking.view.baseviewpager.ThreeBaseTagPager;
+import com.example.monking.view.baseviewpager.TwoBaseTagPager;
 
 import java.util.ArrayList;
 import java.util.List;

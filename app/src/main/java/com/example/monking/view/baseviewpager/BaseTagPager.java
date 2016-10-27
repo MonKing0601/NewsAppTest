@@ -1,4 +1,4 @@
-package com.example.monking.viewpager;
+package com.example.monking.view.baseviewpager;
 
 import android.view.View;
 import android.widget.FrameLayout;
@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.monking.domain.NewsMenu;
-import com.example.monking.fragment.MenuFragment;
+import com.example.monking.view.fragment.MenuFragment;
 import com.example.monking.global.GlobalConstants;
 import com.example.monking.newsapptest.R;
 import com.example.monking.newsapptest.act.MainActivity;

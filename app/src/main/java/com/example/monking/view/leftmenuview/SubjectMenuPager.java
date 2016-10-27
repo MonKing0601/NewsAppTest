@@ -1,4 +1,4 @@
-package com.example.monking.view.menuview;
+package com.example.monking.view.leftmenuview;
 
 import android.view.Gravity;
 import android.view.View;

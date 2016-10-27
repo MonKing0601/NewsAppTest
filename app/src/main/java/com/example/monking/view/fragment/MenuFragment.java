@@ -1,4 +1,4 @@
-package com.example.monking.fragment;
+package com.example.monking.view.fragment;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.example.monking.domain.NewsMenu;
 import com.example.monking.newsapptest.R;
-import com.example.monking.viewpager.OneBaseTagPager;
+import com.example.monking.view.baseviewpager.OneBaseTagPager;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 

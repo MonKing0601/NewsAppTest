@@ -1,4 +1,4 @@
-package com.example.monking.viewpager;
+package com.example.monking.view.baseviewpager;
 
 import com.example.monking.newsapptest.act.MainActivity;
 

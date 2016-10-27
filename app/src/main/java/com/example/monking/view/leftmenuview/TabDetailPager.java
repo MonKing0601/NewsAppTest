@@ -1,4 +1,4 @@
-package com.example.monking.view.menuview;
+package com.example.monking.view.leftmenuview;
 
 import android.graphics.Color;
 import android.view.Gravity;
@@ -23,20 +23,20 @@ public class TabDetailPager extends BaseMenuDetailPager {
     public TabDetailPager(MainActivity activity, String dataMenus) {
         super(activity);
         title=dataMenus;
+
     }
 
     @Override
     public View initView() {
         tv = new TextView(mainActivity);
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextSize(30);
+        tv.setTextColor(Color.BLACK);
         return tv;
     }
 
     @Override
     public void initData() {
-        tv.setTextColor(Color.BLACK);
         tv.setText(title);
-        tv.setGravity(Gravity.CENTER);
-        tv.setTextSize(30);
-
     }
 }

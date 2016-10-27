@@ -1,4 +1,4 @@
-package com.example.monking.view.menuview;
+package com.example.monking.view.leftmenuview;
 
 import android.view.View;
 
@@ -16,7 +16,6 @@ public abstract class BaseMenuDetailPager {
     public BaseMenuDetailPager(MainActivity activity) {
         mainActivity = activity;
         rootView = initView();
-
     }
 
     public abstract View initView();

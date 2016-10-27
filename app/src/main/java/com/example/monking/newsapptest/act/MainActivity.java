@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.example.monking.fragment.MainContentFragment;
-import com.example.monking.fragment.MenuFragment;
+import com.example.monking.view.fragment.MainContentFragment;
+import com.example.monking.view.fragment.MenuFragment;
 import com.example.monking.newsapptest.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;

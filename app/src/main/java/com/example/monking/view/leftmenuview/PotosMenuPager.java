@@ -1,4 +1,4 @@
-package com.example.monking.view.menuview;
+package com.example.monking.view.leftmenuview;
 
 import android.view.Gravity;
 import android.view.View;
@@ -10,15 +10,15 @@ import com.example.monking.newsapptest.act.MainActivity;
  * Created by MonKing on 2016/10/22.
  */
 
-public class InteractMenuPager extends BaseMenuDetailPager {
-    public InteractMenuPager(MainActivity activity) {
+public class PotosMenuPager extends BaseMenuDetailPager {
+    public PotosMenuPager(MainActivity activity) {
         super(activity);
     }
 
     @Override
     public View initView() {
         TextView tv=new TextView(mainActivity);
-        tv.setText("侧边栏互动页面");
+        tv.setText("侧边栏图片页面");
         tv.setGravity(Gravity.CENTER);
         tv.setTextSize(22);
         return tv;

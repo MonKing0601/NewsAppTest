@@ -100,7 +100,6 @@ public class BaseTagPager {
     public void processJson(String json) {
         Gson gson = new Gson();
         newsMenu = gson.fromJson(json, NewsMenu.class);
-        System.out.println("解析完成后的" + newsMenu);
         //获取侧边栏对象
         MainActivity mainUI = mainActivity;
         MenuFragment menuFragment = mainUI.getLeftMenuFragment();

@@ -37,9 +37,8 @@ public class NewsMenuPager extends BaseMenuDetailPager {
         dataMenus = menuFragment.getmnewsMenusData();
         mPagers = new ArrayList<TabDetailPager>();
         for (int i = 0; i < dataMenus.get(0).children.size(); i++) {
-            TabDetailPager tabDetailPager = new TabDetailPager(mainActivity, dataMenus.get(0).children.get(i).title);
+            TabDetailPager tabDetailPager = new TabDetailPager(mainActivity, dataMenus.get(0).children.get(i));
             mPagers.add(tabDetailPager);
-            System.out.println(mPagers.get(i));
         }
 
         NewsMenuDetailApapter adapter = new NewsMenuDetailApapter();

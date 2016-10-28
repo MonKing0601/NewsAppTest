@@ -4,6 +4,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 
@@ -34,10 +36,12 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private ViewPager mViewpager;
     private TextView mTextview;
     private ListView mListView;
+    private CirclePageIndicator mIndicator;
     private String result;
     private String Url;
     private TabDetailBean tdBean;
     private ArrayList<TabDetailBean.TopNewsData> topNewsDatas;
+    private ArrayList<TabDetailBean.NewsData> listNewsDatas;
 
     public TabDetailPager(MainActivity activity, NewsMenu.Children dataMenus) {
         super(activity);
@@ -50,7 +54,8 @@ public class TabDetailPager extends BaseMenuDetailPager {
         View view=View.inflate(mainActivity, R.layout.tab_detail_content_layout,null);
         mViewpager= (ViewPager) view.findViewById(R.id.tab_detail_top_viewpager);
         mTextview= (TextView) view.findViewById(R.id.detail_content_title);
-
+        mIndicator= (CirclePageIndicator) view.findViewById(R.id.circle_indicator);
+        mListView= (ListView) view.findViewById(R.id.tab_detail_listview);
         return view;
     }
 
@@ -86,10 +91,13 @@ public class TabDetailPager extends BaseMenuDetailPager {
     public void processJson(String json) {
         Gson gson = new Gson();
         tdBean = gson.fromJson(json, TabDetailBean.class);
+        //取到头条viewpager的信息，并设置相关的属性
         topNewsDatas=tdBean.data.topnews;
         if (topNewsDatas!=null){
             mViewpager.setAdapter(new TabDetailAdapter());
-            mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            mIndicator.setViewPager(mViewpager);
+            mIndicator.setSnap(true);
+            mIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                     //设置标题
@@ -105,9 +113,21 @@ public class TabDetailPager extends BaseMenuDetailPager {
                 public void onPageScrollStateChanged(int state) {
 
                 }
+
+
             });
+            mIndicator.onPageSelected(0);
+
+
         }else{
             System.out.println("topnewsdata返回为空值");
+        }
+        //listview的新闻信息，并设置
+        listNewsDatas=tdBean.data.news;
+        if (listNewsDatas!=null){
+            mListView.setAdapter(new TabDetailListAdapter());
+        }else{
+            System.out.println("listnewsdatas 为空值");
         }
     }
 
@@ -144,6 +164,47 @@ public class TabDetailPager extends BaseMenuDetailPager {
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view==object;
+        }
+    }
+
+    /**
+     * 创建listview适配器
+     */
+    class TabDetailListAdapter extends BaseAdapter{
+        private BitmapUtils bitmapUtils;
+
+        public TabDetailListAdapter() {
+            bitmapUtils=new BitmapUtils(mainActivity);
+        }
+
+        @Override
+        public int getCount() {
+            return listNewsDatas.size();
+        }
+
+        @Override
+        public TabDetailBean.NewsData getItem(int position) {
+            return listNewsDatas.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view=View.inflate(mainActivity,R.layout.tab_detail_content_listview,null);
+            TextView mTextview= (TextView) view.findViewById(R.id.list_content_textview);
+            TextView mTimeview= (TextView) view.findViewById(R.id.list_time_textview);
+            ImageView mImageView= (ImageView) view.findViewById(R.id.detail_list_image);
+            mTextview.setText(listNewsDatas.get(position).title);
+            mTimeview.setText(listNewsDatas.get(position).pubdate);
+            String str=listNewsDatas.get(position).listimage;
+            bitmapUtils.configDefaultLoadingImage(R.drawable.news_pic_default);
+            bitmapUtils.display(mImageView,str);
+            convertView=view;
+            return convertView;
         }
     }
 }

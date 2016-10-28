@@ -52,10 +52,13 @@ public class TabDetailPager extends BaseMenuDetailPager {
     @Override
     public View initView() {
         View view=View.inflate(mainActivity, R.layout.tab_detail_content_layout,null);
-        mViewpager= (ViewPager) view.findViewById(R.id.tab_detail_top_viewpager);
-        mTextview= (TextView) view.findViewById(R.id.detail_content_title);
-        mIndicator= (CirclePageIndicator) view.findViewById(R.id.circle_indicator);
         mListView= (ListView) view.findViewById(R.id.tab_detail_listview);
+        View heardview=View.inflate(mainActivity,R.layout.detail_list_headview,null);
+        mViewpager= (ViewPager) heardview.findViewById(R.id.tab_detail_top_viewpager);
+        mTextview= (TextView) heardview.findViewById(R.id.detail_content_title);
+        mIndicator= (CirclePageIndicator) heardview.findViewById(R.id.circle_indicator);
+
+        mListView.addHeaderView(heardview);
         return view;
     }
 
@@ -194,17 +197,29 @@ public class TabDetailPager extends BaseMenuDetailPager {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View view=View.inflate(mainActivity,R.layout.tab_detail_content_listview,null);
-            TextView mTextview= (TextView) view.findViewById(R.id.list_content_textview);
-            TextView mTimeview= (TextView) view.findViewById(R.id.list_time_textview);
-            ImageView mImageView= (ImageView) view.findViewById(R.id.detail_list_image);
-            mTextview.setText(listNewsDatas.get(position).title);
-            mTimeview.setText(listNewsDatas.get(position).pubdate);
-            String str=listNewsDatas.get(position).listimage;
+            ViewHolder viewHolder;
+            if (convertView==null) {
+                convertView = View.inflate(mainActivity, R.layout.tab_detail_content_listview, null);
+                viewHolder=new ViewHolder();
+                viewHolder.mIcon=(ImageView) convertView.findViewById(R.id.detail_list_image);
+                viewHolder.mContentText=(TextView) convertView.findViewById(R.id.list_content_textview);
+                viewHolder.mDateText=(TextView) convertView.findViewById(R.id.list_time_textview);
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder= (ViewHolder) convertView.getTag();
+            }
+            String str = listNewsDatas.get(position).listimage;
             bitmapUtils.configDefaultLoadingImage(R.drawable.news_pic_default);
-            bitmapUtils.display(mImageView,str);
-            convertView=view;
+            bitmapUtils.display(viewHolder.mIcon, str);
+            viewHolder.mContentText.setText(listNewsDatas.get(position).title);
+            viewHolder.mDateText.setText(listNewsDatas.get(position).pubdate);
             return convertView;
         }
+    }
+
+    static class ViewHolder{
+        public ImageView mIcon;
+        public TextView mContentText;
+        public TextView mDateText;
     }
 }

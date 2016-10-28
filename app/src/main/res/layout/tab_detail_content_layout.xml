@@ -4,44 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="193dp">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/tab_detail_top_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <RelativeLayout
-            android:id="@+id/tab_relayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="#a000"
-            android:padding="5dp">
-
-            <TextView
-                android:id="@+id/detail_content_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/detail_content_title">
-
-                <com.viewpagerindicator.CirclePageIndicator
-                    android:id="@+id/circle_indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:padding="5dp"/>
-            </RelativeLayout>
-        </RelativeLayout>
-    </FrameLayout>
     <ListView
         android:id="@+id/tab_detail_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>

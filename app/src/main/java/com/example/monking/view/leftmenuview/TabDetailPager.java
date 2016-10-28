@@ -32,6 +32,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private NewsMenu.Children dataMenus;
     private TextView tv;
     private ViewPager mViewpager;
+    private TextView mTextview;
     private ListView mListView;
     private String result;
     private String Url;
@@ -48,6 +49,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     public View initView() {
         View view=View.inflate(mainActivity, R.layout.tab_detail_content_layout,null);
         mViewpager= (ViewPager) view.findViewById(R.id.tab_detail_top_viewpager);
+        mTextview= (TextView) view.findViewById(R.id.detail_content_title);
 
         return view;
     }
@@ -87,6 +89,23 @@ public class TabDetailPager extends BaseMenuDetailPager {
         topNewsDatas=tdBean.data.topnews;
         if (topNewsDatas!=null){
             mViewpager.setAdapter(new TabDetailAdapter());
+            mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    //设置标题
+                    mTextview.setText(topNewsDatas.get(position).title);
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
         }else{
             System.out.println("topnewsdata返回为空值");
         }
@@ -110,7 +129,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView=new ImageView(mainActivity);
-            imageView.setImageResource(R.drawable.topnews_item_default);
+            mBitmapUtils.configDefaultLoadingImage(R.drawable.topnews_item_default);
             String url=topNewsDatas.get(position).topimage;
             mBitmapUtils.display(imageView,url);
             container.addView(imageView);

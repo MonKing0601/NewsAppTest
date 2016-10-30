@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.monking.domain.NewsMenu;
@@ -14,6 +13,7 @@ import com.example.monking.domain.TabDetailBean;
 import com.example.monking.global.GlobalConstants;
 import com.example.monking.newsapptest.R;
 import com.example.monking.newsapptest.act.MainActivity;
+import com.example.monking.rewrite.PullToRefreshListView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
@@ -35,7 +35,7 @@ public class TabDetailPager extends BaseMenuDetailPager {
     private TextView tv;
     private ViewPager mViewpager;
     private TextView mTextview;
-    private ListView mListView;
+    private PullToRefreshListView mListView;
     private CirclePageIndicator mIndicator;
     private String result;
     private String Url;
@@ -49,10 +49,14 @@ public class TabDetailPager extends BaseMenuDetailPager {
 
     }
 
+    /**
+     * 绑定布局
+     * @return
+     */
     @Override
     public View initView() {
         View view=View.inflate(mainActivity, R.layout.tab_detail_content_layout,null);
-        mListView= (ListView) view.findViewById(R.id.tab_detail_listview);
+        mListView= (PullToRefreshListView) view.findViewById(R.id.tab_detail_listview);
         View heardview=View.inflate(mainActivity,R.layout.detail_list_headview,null);
         mViewpager= (ViewPager) heardview.findViewById(R.id.tab_detail_top_viewpager);
         mTextview= (TextView) heardview.findViewById(R.id.detail_content_title);
@@ -62,6 +66,9 @@ public class TabDetailPager extends BaseMenuDetailPager {
         return view;
     }
 
+    /**
+     * 链接服务器获取数据
+     */
     @Override
     public void initData() {
         Url= GlobalConstants.SERVER_URL+dataMenus.url;

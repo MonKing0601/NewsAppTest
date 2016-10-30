@@ -14,7 +14,6 @@ public class DepthPageTransformer implements ViewPager.PageTransformer {
     @Override
     public void transformPage(View page, float position) {
         int pageWidth = page.getWidth();
-        System.out.println("pageWidth = " + pageWidth);
 
         if (position < -1) {
             page.setAlpha(0);

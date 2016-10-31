@@ -61,8 +61,13 @@ public class TabDetailPager extends BaseMenuDetailPager {
         mViewpager= (ViewPager) heardview.findViewById(R.id.tab_detail_top_viewpager);
         mTextview= (TextView) heardview.findViewById(R.id.detail_content_title);
         mIndicator= (CirclePageIndicator) heardview.findViewById(R.id.circle_indicator);
-
         mListView.addHeaderView(heardview);
+        mListView.setOnRefreshListener(new PullToRefreshListView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDataFromServer();
+            }
+        });
         return view;
     }
 
@@ -86,6 +91,8 @@ public class TabDetailPager extends BaseMenuDetailPager {
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 result = responseInfo.result;
                 processJson(result);
+                mListView.visibleHeadView();
+                System.out.println("刷新完毕");
             }
 
             @Override

@@ -2,23 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="horizontal">
 
 
     <FrameLayout
+
         android:paddingTop="10dp"
         android:paddingStart="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/refresh_image"
+            android:id="@+id/refresh_detail_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/common_listview_headview_red_arrow" />
 
         <ProgressBar
+            android:visibility="invisible"
             android:layout_gravity="center"
             android:id="@+id/pd_loading"
             android:layout_width="wrap_content"
@@ -36,6 +39,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/refreash_textview"
             android:textColor="#357"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
@@ -44,6 +48,7 @@
             android:textSize="25dp" />
 
         <TextView
+            android:id="@+id/refreash_time"
             android:paddingTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

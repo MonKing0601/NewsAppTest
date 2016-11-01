@@ -91,14 +91,14 @@ public class TabDetailPager extends BaseMenuDetailPager {
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 result = responseInfo.result;
                 processJson(result);
-                mListView.visibleHeadView();
+                mListView.visibleHeadView(true);
                 System.out.println("刷新完毕");
             }
 
             @Override
             public void onFailure(HttpException e, String s) {
                 e.getExceptionCode();
-
+                mListView.visibleHeadView(false);
             }
         });
     }

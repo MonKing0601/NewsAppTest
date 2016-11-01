@@ -10,8 +10,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.example.monking.newsapptest.R;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by MonKing on 2016/10/30.
@@ -64,6 +65,8 @@ public class PullToRefreshListView extends ListView {
         mHeadView.setPadding(0, -measurHeight, 0, 0);
         //初始化动画
         initAnimation();
+        //初始化时间
+        updateTime();
     }
 
     @Override
@@ -171,11 +174,23 @@ public class PullToRefreshListView extends ListView {
     /**
      * 隐藏头部list方法   调用
      */
-    public void visibleHeadView(){
+    public void visibleHeadView(boolean success){
+        if (success){
+            updateTime();
+        }
         mCurrtentState=STATE_PULL_TO_REFREASH;
         mHeadView.setPadding(0,-measurHeight,0,0);
         mTextview.setText("下拉刷新");
         mImageview.setVisibility(View.VISIBLE);
         mProgress.setVisibility(View.INVISIBLE);
+    }
+    /**
+     * 下拉刷新时间
+     */
+    public void updateTime(){
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date =new Date(System.currentTimeMillis());
+        String time =format.format(date);
+        mTime.setText(time);
     }
 }

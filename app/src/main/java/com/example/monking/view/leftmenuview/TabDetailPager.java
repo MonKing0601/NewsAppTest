@@ -1,5 +1,6 @@
 package com.example.monking.view.leftmenuview;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -17,6 +18,7 @@ import com.example.monking.domain.TabDetailBean;
 import com.example.monking.global.GlobalConstants;
 import com.example.monking.newsapptest.R;
 import com.example.monking.newsapptest.act.MainActivity;
+import com.example.monking.newsapptest.act.NewsDetailActivity;
 import com.example.monking.rewrite.PullToRefreshListView;
 import com.example.monking.utils.SharedPreferencesUtils;
 import com.google.gson.Gson;
@@ -90,16 +92,19 @@ public class TabDetailPager extends BaseMenuDetailPager {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                position = position - mListView.getHeaderViewsCount();
+                position = position - mListView.getHeaderViewsCount();//减去两个头布局的数量，使获取的position是所需的数据
                 TabDetailBean.NewsData data= tdBean.data.news.get(position);
-                Toast.makeText(mainActivity, "第" + position + "个被点击了", Toast.LENGTH_SHORT).show();
-                String readId = SharedPreferencesUtils.getString(mainActivity,"readId","");
-                readId = readId + data.id + ",";
-                SharedPreferencesUtils.saveString(mainActivity, "readId", readId);
-                if (readId.contains(data.id+"")){
+                String readId = SharedPreferencesUtils.getString(mainActivity,"readId","");//获取保存在本机的数据，用于记录是否被点击了
+                if (!readId.contains(data.id+"")){//判断字符串是否有这个ID
+                    readId = readId + data.id + ","; //再加上新的点击数据到字符串里
+                    SharedPreferencesUtils.saveString(mainActivity, "readId", readId);//然后保存到数据里面
                     TextView tvTitle= (TextView) view.findViewById(R.id.list_content_textview);
                     tvTitle.setTextColor(Color.GRAY);
                 }
+                Intent intent=new Intent(mainActivity, NewsDetailActivity.class);
+                intent.putExtra("url",data.url);
+                mainActivity.startActivity(intent);
+
             }
         });
         return view;

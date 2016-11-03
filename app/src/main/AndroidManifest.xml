@@ -33,6 +33,8 @@
             android:name=".act.MainActivity"
             android:screenOrientation="portrait"
             />
+        <!--新闻跳转详情页面-->
+        <activity android:name=".act.NewsDetailActivity"/>
     </application>
 
 </manifest>

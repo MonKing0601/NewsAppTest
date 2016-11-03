@@ -6,11 +6,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.example.monking.newsapptest.R;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -18,7 +21,7 @@ import java.text.SimpleDateFormat;
  * Created by MonKing on 2016/10/30.
  */
 
-public class PullToRefreshListView extends ListView {
+public class PullToRefreshListView extends ListView implements AbsListView.OnScrollListener{
     private View mHeadView;
     private int measurHeight;
     private int startY = -1;
@@ -34,26 +37,37 @@ public class PullToRefreshListView extends ListView {
     private RotateAnimation animDown;
     private ProgressBar mProgress;
     private OnRefreshListener mRefreshListener;
+    private View mFooterView;
+    private int mFooterViewHeight;
 
 
     public PullToRefreshListView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initHeadView();
+        initFooterView();
     }
 
     public PullToRefreshListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initHeadView();
+        initFooterView();
     }
 
     public PullToRefreshListView(Context context) {
         super(context);
         initHeadView();
+        initFooterView();
     }
 
-
+    /**
+     * 添加头布局,绑定了一个头布局的刷新布局layout
+     * 里面实现的功能有：
+     * 1.隐藏头布局
+     * 2.初始化刷新动画的效果
+     * 3.初始化时间
+     */
     public void initHeadView() {
-        mHeadView = View.inflate(getContext(), R.layout.refresh_layout, null);
+        mHeadView = View.inflate(getContext(), R.layout.refresh_header_layout, null);
         mTextview = (TextView) mHeadView.findViewById(R.id.refreash_textview);
         mTime = (TextView) mHeadView.findViewById(R.id.refreash_time);
         mImageview = (ImageView) mHeadView.findViewById(R.id.refresh_detail_image);
@@ -69,6 +83,20 @@ public class PullToRefreshListView extends ListView {
         updateTime();
     }
 
+    /**
+     * 触底刷新的方法。
+     * 添加脚布局
+     *
+     */
+    public void initFooterView(){
+        mFooterView = View.inflate(getContext(), R.layout.refresh_footer_layout,null);
+            this.addFooterView(mFooterView);
+            mFooterView.measure(0,0);
+        mFooterViewHeight = mFooterView.getMeasuredHeight();
+            mFooterView.setPadding(0,-mFooterViewHeight,0,0);
+            this.setOnScrollListener(this);//给listview设置滑动监听
+
+    }
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
@@ -165,24 +193,33 @@ public class PullToRefreshListView extends ListView {
     public void setOnRefreshListener(OnRefreshListener refreshListener){
         mRefreshListener = refreshListener;
     }
+
+
     /**
      * 一个回调的接口
      */
     public interface OnRefreshListener{
         public void onRefresh();
+        public void onLoadMore();
     }
     /**
      * 隐藏头部list方法   调用
      */
     public void visibleHeadView(boolean success){
-        if (success){
-            updateTime();
+        if (!isLoadMore){
+            mCurrtentState=STATE_PULL_TO_REFREASH;
+            mHeadView.setPadding(0,-measurHeight,0,0);
+            mTextview.setText("下拉刷新");
+            mImageview.setVisibility(View.VISIBLE);
+            mProgress.setVisibility(View.INVISIBLE);
+            if (success){//刷新成功才更新时间
+                updateTime();
+            }
+        }else{
+            mFooterView.setPadding(0,-mFooterViewHeight,0,0);
+            isLoadMore=false;
         }
-        mCurrtentState=STATE_PULL_TO_REFREASH;
-        mHeadView.setPadding(0,-measurHeight,0,0);
-        mTextview.setText("下拉刷新");
-        mImageview.setVisibility(View.VISIBLE);
-        mProgress.setVisibility(View.INVISIBLE);
+
     }
     /**
      * 下拉刷新时间
@@ -192,5 +229,32 @@ public class PullToRefreshListView extends ListView {
         Date date =new Date(System.currentTimeMillis());
         String time =format.format(date);
         mTime.setText(time);
+    }
+
+    /**
+     * 滑动状态接口监听方法
+     * @param view
+     * @param scrollState
+     */
+    private boolean isLoadMore;
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+        if (scrollState==SCROLL_STATE_IDLE){
+            int lastVisiblePosition = getLastVisiblePosition();
+            if (lastVisiblePosition==getCount()-1&&!isLoadMore){
+                isLoadMore=true;
+                mFooterView.setPadding(0,0,0,0);
+                setSelection(getCount()-1);
+                //通知主页加载数据
+                if(mRefreshListener!=null){
+                    mRefreshListener.onLoadMore();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
     }
 }

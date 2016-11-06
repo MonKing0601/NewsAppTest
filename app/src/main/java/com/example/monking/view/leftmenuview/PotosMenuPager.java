@@ -44,7 +44,6 @@ public class PotosMenuPager extends BaseMenuDetailPager {
         mRecycleView = (RecyclerView) view.findViewById(R.id.recycle_view);
         mRecycleView.setLayoutManager(new LinearLayoutManager(mainActivity));
         mRecycleView.addItemDecoration(new DividerItemDecoration(mainActivity,DividerItemDecoration.VERTICAL_LIST));
-        //数据已经传过去了。
         PhotoAdapter adapter=new PhotoAdapter(mainActivity,mNewsList);
         mRecycleView.setAdapter(adapter);
         return view;

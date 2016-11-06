@@ -2,6 +2,7 @@ package com.example.monking.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private LayoutInflater mInflater;
     private MyViewHolder mHolder;
     private BitmapUtils utils;
-
+    private static final String TAG = "PhotoAdapter";
     public PhotoAdapter(Context context, ArrayList<PhotoBean.PhotoNews> data) {
         mContext = context;
         mData = data;
@@ -41,10 +42,16 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.d(TAG, "第几个: "+position);
         utils.display(mHolder.mImage,mData.get(position).listimage);
         mHolder.mText.setText(mData.get(position).title);
     }
 
+    //不重写这个方法，获取的数据会混乱不堪
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
 
     @Override

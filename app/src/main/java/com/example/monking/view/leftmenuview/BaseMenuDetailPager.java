@@ -24,8 +24,5 @@ public abstract class BaseMenuDetailPager {
 
     }
 
-    public View getRootView(){
-        return rootView;
-    }
 
 }

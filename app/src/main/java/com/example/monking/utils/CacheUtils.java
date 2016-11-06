@@ -8,7 +8,7 @@ import android.content.Context;
  */
 
 public class CacheUtils {
-    public static void setCache(Context context,String url,String json){
+    public static void setCache(Context context, String url, String json){
         SharedPreferencesUtils.saveString(context,url,json);
     }
 

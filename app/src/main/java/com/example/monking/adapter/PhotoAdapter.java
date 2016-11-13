@@ -46,7 +46,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         mHolder.mImage.setTag(mData.get(position).listimage);
         utils=new MyBitMapUtils(mData.get(position).listimage);
-        utils.display(mHolder.mImage, mData.get(position).listimage,position);
+        utils.display(mHolder.mImage, mData.get(position).listimage);
         mHolder.mText.setText(mData.get(position).title);
     }
 

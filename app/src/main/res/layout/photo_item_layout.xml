@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical">
 
     <LinearLayout
@@ -15,14 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/pic_item_list_default"/>
+     />
 
         <TextView
             android:id="@+id/photo_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="先打几个字测试一下"
             android:gravity="center"
             android:textColor="#000"
             android:textSize="20sp"/>

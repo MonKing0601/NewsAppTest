@@ -2,7 +2,6 @@ package com.example.monking.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.monking.domain.PhotoBean;
 import com.example.monking.newsapptest.R;
-import com.lidroid.xutils.BitmapUtils;
+import com.example.monking.utils.MyBitMapUtils;
 
 import java.util.ArrayList;
 
@@ -24,26 +23,30 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private ArrayList<PhotoBean.PhotoNews> mData;
     private LayoutInflater mInflater;
     private MyViewHolder mHolder;
-    private BitmapUtils utils;
-    private static final String TAG = "PhotoAdapter";
+    private MyBitMapUtils utils;
+
     public PhotoAdapter(Context context, ArrayList<PhotoBean.PhotoNews> data) {
         mContext = context;
         mData = data;
         mInflater = LayoutInflater.from(context);
-        utils = new BitmapUtils(mContext);
+
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.photo_item_layout, parent, false);
         mHolder = new MyViewHolder(view);
+        mHolder.mImage = (ImageView) mHolder.itemView.findViewById(R.id.photo_item_image);
+        mHolder.mImage.setImageResource(R.drawable.pic_item_list_default);
+        mHolder.mText = (TextView) mHolder.itemView.findViewById(R.id.photo_item_text);
         return mHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.d(TAG, "第几个: "+position);
-        utils.display(mHolder.mImage,mData.get(position).listimage);
+        mHolder.mImage.setTag(mData.get(position).listimage);
+        utils=new MyBitMapUtils(mData.get(position).listimage);
+        utils.display(mHolder.mImage, mData.get(position).listimage,position);
         mHolder.mText.setText(mData.get(position).title);
     }
 
@@ -59,15 +62,14 @@ public class PhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mData.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mImage;
         private TextView mText;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            mImage = (ImageView) itemView.findViewById(R.id.photo_item_image);
-            mText = (TextView) itemView.findViewById(R.id.photo_item_text);
+
         }
     }
 }

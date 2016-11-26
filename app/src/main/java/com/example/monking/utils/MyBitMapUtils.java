@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import static android.content.ContentValues.TAG;
 
 /**
- * 自定义三级缓存图片加载
+ * 自定义二级缓存图片加载
  * Created by MonKing on 2016/11/12.
  */
 

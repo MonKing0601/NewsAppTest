@@ -1,10 +1,7 @@
 package com.example.monking.utils;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.ImageView;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * 自定义二级缓存图片加载
@@ -29,7 +26,6 @@ public class MyBitMapUtils {
             Bitmap bitmap = mLocalCacheUtils.getLocaCache(url);
             if (bitmap != null) {
                 mImage.setImageBitmap(bitmap);
-                Log.d(TAG, "display: " + "有本地缓存了");
                 return;
             }
         } catch (Exception e) {

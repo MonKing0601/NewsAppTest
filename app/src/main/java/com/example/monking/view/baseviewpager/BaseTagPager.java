@@ -1,16 +1,17 @@
 package com.example.monking.view.baseviewpager;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.monking.domain.NewsMenu;
-import com.example.monking.view.fragment.MenuFragment;
 import com.example.monking.global.GlobalConstants;
 import com.example.monking.newsapptest.R;
 import com.example.monking.newsapptest.act.MainActivity;
 import com.example.monking.utils.CacheUtils;
+import com.example.monking.view.fragment.MenuFragment;
 import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -31,6 +32,7 @@ public class BaseTagPager {
     protected FrameLayout frameLayout;
     protected String result;
     protected NewsMenu newsMenu;
+    private static final String TAG = "BaseTagPager";
 
     public BaseTagPager(MainActivity mainActivity) {
         this.mainActivity=mainActivity;
@@ -98,8 +100,10 @@ public class BaseTagPager {
      * @param json
      */
     public void processJson(String json) {
+
         Gson gson = new Gson();
-        newsMenu = gson.fromJson(json, NewsMenu.class);
+        Log.d(TAG, "processJson: "+json);
+        newsMenu = gson.fromJson(json,NewsMenu.class);
         //获取侧边栏对象
         MainActivity mainUI = mainActivity;
         MenuFragment menuFragment = mainUI.getLeftMenuFragment();

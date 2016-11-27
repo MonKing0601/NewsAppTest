@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.monking.domain.PhotoBean;
 import com.example.monking.newsapptest.R;
 import com.example.monking.utils.MyBitMapUtils;

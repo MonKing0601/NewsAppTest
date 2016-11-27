@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.monking.adapter.PhotoAdapter;
 import com.example.monking.domain.PhotoBean;
 import com.example.monking.global.GlobalConstants;
@@ -19,7 +18,6 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-
 import java.util.ArrayList;
 
 /**
@@ -30,8 +28,6 @@ public class PotosMenuPager extends BaseMenuDetailPager {
     private RecyclerView mRecycleView;
     private ArrayList<PhotoBean.PhotoNews> mNewsList;
     private View view;
-    private static final String TAG = "PotosMenuPager";
-
     public PotosMenuPager(MainActivity activity) {
         super(activity);
 
@@ -39,13 +35,8 @@ public class PotosMenuPager extends BaseMenuDetailPager {
 
     @Override
     public View initView() {
-        initData();
         view = View.inflate(mainActivity, R.layout.photo_menu_layout, null);
         mRecycleView = (RecyclerView) view.findViewById(R.id.recycle_view);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(mainActivity));
-        mRecycleView.addItemDecoration(new DividerItemDecoration(mainActivity,DividerItemDecoration.VERTICAL_LIST));
-        PhotoAdapter adapter=new PhotoAdapter(mainActivity,mNewsList);
-        mRecycleView.setAdapter(adapter);
         return view;
     }
 
@@ -54,6 +45,10 @@ public class PotosMenuPager extends BaseMenuDetailPager {
         String cache = CacheUtils.getCache(mainActivity, GlobalConstants.PHOTO_URL);
         if (!TextUtils.isEmpty(cache)) {
             processData(cache);
+            mRecycleView.setLayoutManager(new LinearLayoutManager(mainActivity));
+            mRecycleView.addItemDecoration(new DividerItemDecoration(mainActivity,DividerItemDecoration.VERTICAL_LIST));
+            PhotoAdapter adapter=new PhotoAdapter(mainActivity,mNewsList);
+            mRecycleView.setAdapter(adapter);
         } else {
             //这边要读取服务器文件
             getDataFromSever();
@@ -69,6 +64,10 @@ public class PotosMenuPager extends BaseMenuDetailPager {
                 String result = responseInfo.result;
                 processData(result);
                 CacheUtils.setCache(mainActivity, GlobalConstants.PHOTO_URL, result);
+                mRecycleView.setLayoutManager(new LinearLayoutManager(mainActivity));
+                mRecycleView.addItemDecoration(new DividerItemDecoration(mainActivity,DividerItemDecoration.VERTICAL_LIST));
+                PhotoAdapter adapter=new PhotoAdapter(mainActivity,mNewsList);
+                mRecycleView.setAdapter(adapter);
             }
 
             @Override

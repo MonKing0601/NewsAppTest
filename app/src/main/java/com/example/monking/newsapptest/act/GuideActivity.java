@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class GuideActivity extends Activity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
     private ArrayList<ImageView> mImageLists;
-    private int[] ImageRes = {R.mipmap.splash_horse_newyear, R.drawable.splash_2_newyear, R.drawable.splash_3_newyear};
+    private int[] ImageRes = {R.mipmap.guide_1, R.mipmap.guide_2, R.mipmap.guide_3};
     private Button mButton;
     private static final boolean NO_FIRST_NUMBER=true;
 

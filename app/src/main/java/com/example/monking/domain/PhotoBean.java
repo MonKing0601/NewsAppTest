@@ -3,6 +3,7 @@ package com.example.monking.domain;
 import java.util.ArrayList;
 
 /**
+ * 组图JSON Bean
  * Created by MonKing on 2016/11/6.
  */
 

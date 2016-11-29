@@ -3,6 +3,7 @@ package com.example.monking.domain;
 import java.util.ArrayList;
 
 /**
+ * 新闻JSON Bean
  * Created by MonKing on 2016/10/27.
  */
 

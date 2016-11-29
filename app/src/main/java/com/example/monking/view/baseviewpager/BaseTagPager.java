@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.monking.domain.NewsMenu;
 import com.example.monking.global.GlobalConstants;
@@ -90,7 +91,7 @@ public class BaseTagPager {
             @Override
             public void onFailure(HttpException e, String s) {
                 e.getExceptionCode();
-
+                Toast.makeText(mainActivity, "网络访问失败", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,7 +101,6 @@ public class BaseTagPager {
      * @param json
      */
     public void processJson(String json) {
-
         Gson gson = new Gson();
         Log.d(TAG, "processJson: "+json);
         newsMenu = gson.fromJson(json,NewsMenu.class);
